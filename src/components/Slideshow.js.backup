@@ -3,7 +3,6 @@ import { slideContent, navigationMap } from '../data/slideContent';
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
 import Slide from './Slide';
 import Navigation from './Navigation';
-import ProgressBar from './ProgressBar';
 
 const Slideshow = () => {
   const [currentCoords, setCurrentCoords] = useState('0,0');
@@ -31,34 +30,21 @@ const Slideshow = () => {
     return content;
   };
   
-  // Enhanced navigation function with support for direct navigation
-  const navigate = (direction, targetCoords = null) => {
-    if (!currentNavigation && !targetCoords) return;
+  // Enhanced navigation function with top-level reset for horizontal movement
+  const navigate = (direction) => {
+    if (!currentNavigation) return;
     
-    // Handle direct navigation (from progress bar clicks)
-    if (direction === 'direct' && targetCoords) {
-      if (navigationMap.has(targetCoords) && !isTransitioning) {
-        setIsTransitioning(true);
-        setTimeout(() => {
-          setCurrentCoords(targetCoords);
-          setIsTransitioning(false);
-        }, 200);
-      }
-      return;
-    }
-    
-    // Handle directional navigation
     const connections = currentNavigation.connections;
-    const nextCoords = connections[direction];
+    const targetCoords = connections[direction];
     
-    if (nextCoords && !isTransitioning) {
-      if (navigationMap.has(nextCoords)) {
+    if (targetCoords && !isTransitioning) {
+      if (navigationMap.has(targetCoords)) {
         setIsTransitioning(true);
         
         // For horizontal navigation (left/right), always go to top level (y=0)
-        let finalCoords = nextCoords;
+        let finalCoords = targetCoords;
         if (direction === 'left' || direction === 'right') {
-          const [x, y] = nextCoords.split(',');
+          const [x, y] = targetCoords.split(',');
           const topLevelCoords = `${x},0`;
           if (navigationMap.has(topLevelCoords)) {
             finalCoords = topLevelCoords;
@@ -70,7 +56,7 @@ const Slideshow = () => {
           setIsTransitioning(false);
         }, 150);
       } else {
-        console.warn(`Target coordinates ${nextCoords} not found in navigationMap`);
+        console.warn(`Target coordinates ${targetCoords} not found in navigationMap`);
       }
     }
   };
@@ -109,25 +95,8 @@ const Slideshow = () => {
       flexDirection: 'column',
       overflow: 'hidden'
     }}>
-      {/* Progress Bar Navigation */}
-      <ProgressBar 
-        currentCoords={currentCoords}
-        navigate={navigate}
-        navigationMap={navigationMap}
-        isTransitioning={isTransitioning}
-      />
+      <Slide slide={currentSlide} isTransitioning={isTransitioning} />
       
-      {/* Main Slide Content - adjusted for progress bar */}
-      <div style={{ 
-        flex: 1, 
-        marginTop: '80px', // Space for progress bar
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        <Slide slide={currentSlide} isTransitioning={isTransitioning} />
-      </div>
-      
-      {/* Bottom Navigation Controls */}
       <Navigation 
         currentNavigation={currentNavigation}
         navigate={navigate}
@@ -135,10 +104,10 @@ const Slideshow = () => {
         navigationMap={navigationMap}
       />
       
-      {/* Debug info - moved to avoid progress bar */}
+      {/* Debug info */}
       <div style={{
         position: 'fixed',
-        top: '90px', // Below progress bar
+        top: '20px',
         left: '20px',
         fontSize: '12px',
         opacity: 0.7,
