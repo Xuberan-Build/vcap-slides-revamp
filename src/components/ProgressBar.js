@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProgressBar = ({ currentCoords, navigate, navigationMap, isTransitioning }) => {
-  // Define the main sections of the consciousness journey
+  // Define the main sections of the consciousness journey - ORIGINAL ORDER
   const sections = [
     { name: 'Title', xRange: [0, 0], color: '#667eea', icon: '✦' },
     { name: 'Introduction', xRange: [1, 1], color: '#f093fb', icon: '🌟' },
@@ -9,8 +9,8 @@ const ProgressBar = ({ currentCoords, navigate, navigationMap, isTransitioning }
     { name: 'Foundation', xRange: [3, 3], color: '#43e97b', icon: '🏛️' },
     { name: 'Presuppositions', xRange: [4, 13], color: '#ffa726', icon: '🧠' },
     { name: 'Money Mindset', xRange: [14, 14], color: '#66bb6a', icon: '💎' },
-    { name: 'Self-Concept', xRange: [15, 15], color: '#ab47bc', icon: '🔮' },
-    { name: 'Values', xRange: [16, 16], color: '#ff7043', icon: '💫' }
+    { name: 'Values', xRange: [15, 15], color: '#ff7043', icon: '💫' },
+    { name: 'Self-Concept', xRange: [16, 16], color: '#ab47bc', icon: '🔮' }
   ];
 
   const [currentX, currentY] = currentCoords.split(',').map(Number);

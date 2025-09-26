@@ -1,21 +1,30 @@
 export const presupposition9 = {
   p9: {
-    problem: {
-      id: 'p9-problem',
+    title: {
+      id: 'p9-title',
       coordinates: { x: 12, y: 0 },
       content: {
         title: "9. You Are Divine Consciousness Experiencing Limitation",
-        oldBelief: "My challenges are obstacles to overcome",
-        explanation: "The challenges you face are opportunities for infinite consciousness to experience growth"
+        type: 'presupposition-title'
       }
     },
-    solution: {
-      id: 'p9-solution',
+    definition: {
+      id: 'p9-definition',
       coordinates: { x: 12, y: 1 },
       content: {
-        title: "9. You Are Divine Consciousness Experiencing Limitation",
-        newBelief: "My challenges are exactly what my soul desires to experience",
-        challenge: "How might this challenge be exactly what your soul desires to experience?"
+        title: "You Are Divine Consciousness Experiencing Limitation",
+        definition: "The challenges you face are not obstacles but opportunities for the infinite to experience itself through contrast. As divine consciousness, you chose this human experience precisely because limitations offer what the infinite cannot know.",
+        insight: "Limitations provide the joy of growth and expansion that infinite consciousness cannot experience without form.",
+        type: 'presupposition-definition'
+      }
+    },
+    challenge: {
+      id: 'p9-challenge',
+      coordinates: { x: 12, y: 2 },
+      content: {
+        title: "Challenge Question",
+        question: "How might this challenge be exactly what your soul desires to experience?",
+        type: 'presupposition-challenge'
       }
     }
   }

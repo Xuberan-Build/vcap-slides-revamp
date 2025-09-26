@@ -15,7 +15,8 @@ export const presuppositionsSection = {
       content: {
         title: "The Matrix of Your Mind",
         statement: "You don't experience raw reality—you experience a personalized matrix constructed by your mind",
-        formula: "Presuppositions → Perception → Decisions → Actions → Results"
+        formula: "Presuppositions → Perception → Decisions → Actions → Results",
+        visualization: 'mind-matrix'
       }
     }
   }

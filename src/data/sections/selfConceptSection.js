@@ -1,34 +1,43 @@
 export const selfConceptSection = {
   selfConcept: {
     intro: {
-      id: 'selfconcept-intro',
-      coordinates: { x: 15, y: 0 },
+      id: 'self-concept-intro',
+      coordinates: { x: 16, y: 0 },
       content: {
-        title: "The Self-Concept Model",
-        statement: "Your self-concept is the 'mother of all beliefs'",
-        elaboration: "Change a belief about the economy, and your business might improve. Change a belief about yourself, and your entire life transforms"
+        title: "From Values to Identity",
+        subtitle: "Transforming Values Consciousness into Lived Reality",
+        statement: "Your self-concept determines whether your values remain ideals or become your lived experience.",
+        type: 'section-intro'
       }
     },
     hierarchy: {
-      id: 'selfconcept-hierarchy',
-      coordinates: { x: 15, y: 1 },
+      id: 'self-concept-hierarchy',
+      coordinates: { x: 16, y: 1 },
       content: {
-        title: "The Hierarchy of Self-Concept",
+        title: "The Identity Integration Process",
         levels: [
-          "Experience: Raw experiences with beginnings and endings",
-          "Qualities: Generalizations about yourself",
-          "Self-Concept: The generalization of all your qualities", 
-          "Self-Esteem: How you feel about your self-concept"
-        ]
+          "Experience: Your daily interactions with reality",
+          "Qualities: How you interpret those experiences ('I am adaptive')",
+          "Self-Concept: Your integrated sense of who you are",
+          "Self-Esteem: How you feel about your capacity to embody your highest values"
+        ],
+        insight: "Transform values into certain qualities of identity, and your behavior automatically aligns.",
+        type: 'hierarchy-model'
       }
     },
     neuroscience: {
-      id: 'selfconcept-neuroscience',
-      coordinates: { x: 15, y: 2 },
+      id: 'self-concept-neuroscience',
+      coordinates: { x: 16, y: 2 },
       content: {
-        title: "The Neuroscience of Identity",
-        statement: "Your brain doesn't help you achieve your goals, your brain helps you live in alignment with your believed identity",
-        elaboration: "The Default Mode Network actively works to maintain consistency with who you believe yourself to be"
+        title: "Living as Your Highest Self",
+        statement: "When your identity matches your highest values, you operate from authentic power rather than forced effort.",
+        benefits: [
+          "Natural access to the values each situation requires",
+          "Effortless alignment between intention and action",
+          "Resilient adaptability without losing core essence",
+          "Consistent expression of your most conscious self"
+        ],
+        type: 'fulfillment-principle'
       }
     }
   }

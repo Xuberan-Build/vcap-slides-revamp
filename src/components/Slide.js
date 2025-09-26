@@ -1,6 +1,13 @@
 import React from 'react';
+import EnhancedSlide from './EnhancedSlide';
 
 const Slide = ({ slide, isTransitioning }) => {
+  // Check if this slide needs special visualization
+  if (slide.content.visualization) {
+    return <EnhancedSlide slide={slide} isTransitioning={isTransitioning} />;
+  }
+
+  // Default slide rendering for all other slides
   return (
     <div style={{
       flex: 1,

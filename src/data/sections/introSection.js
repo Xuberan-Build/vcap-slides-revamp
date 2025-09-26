@@ -5,8 +5,8 @@ export const introSection = {
       coordinates: { x: 1, y: 0 },
       type: 'statement',
       content: {
-        title: "Your Divine Creative Authority",
-        statement: "You already possess divine creative authority that will transform every aspect of your business and life from the inside out",
+        title: "My Role As Your Guide",
+        statement: " My purpose is to awaken you to the god-like creative power that has always resided within you.",
         elaboration: "I am not the hero in your story - you are the divine creator of your reality"
       }
     },
@@ -15,7 +15,7 @@ export const introSection = {
       coordinates: { x: 1, y: 1 },
       type: 'insight',
       content: {
-        title: "Evidence of Your Divine Nature",
+        title: "Enable you to Wield your creative force with precision",
         statement: "The very fact that you can envision goals is evidence of your divine creative nature",
         elaboration: "Your challenges are not evidence of imperfection but the perfected vehicle for consciousness expansion"
       }

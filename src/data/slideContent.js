@@ -39,8 +39,8 @@ export const slideContent = {
   ...presupposition9,
   ...presupposition10,
   ...moneyPresuppositionsSection,
-  ...selfConceptSection,
-  ...valuesSection
+  ...valuesSection,
+  ...selfConceptSection
 };
 
 // Export navigation map

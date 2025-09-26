@@ -1,0 +1,699 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const InnerOuterAlignmentVisualization = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const steps = [
+    {
+      id: 1,
+      title: "Identity Transformation First",
+      description: "We begin by aligning your self-concept with your highest values, creating certainty about who you are at your core.",
+      color: "#ffd93d",
+      radius: 80,
+      particles: 8
+    },
+    {
+      id: 2,
+      title: "Presupposition Shifting", 
+      description: "We identify and transform limiting beliefs that have been unconsciously filtering your perception of reality.",
+      color: "#88d8b0",
+      radius: 120,
+      particles: 12
+    },
+    {
+      id: 3,
+      title: "State Management Mastery",
+      description: "You'll learn to access peak mental and emotional states on demand, rather than being at the mercy of circumstances.",
+      color: "#667eea",
+      radius: 160,
+      particles: 16
+    },
+    {
+      id: 4,
+      title: "Value-Based Decision Making",
+      description: "All business decisions become clearer when filtered through your authentic values.",
+      color: "#764ba2",
+      radius: 200,
+      particles: 20
+    },
+    {
+      id: 5,
+      title: "Behavioral Flexibility",
+      description: "True success comes from adapting to situations while remaining aligned with your core identity.",
+      color: "#f093fb",
+      radius: 240,
+      particles: 24
+    }
+  ];
+
+  // Auto-play animation
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setActiveStep(prev => (prev + 1) % (steps.length + 1));
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, steps.length]);
+
+  // Generate particles for sacred geometry patterns
+  const generateParticles = (step, index) => {
+    const particles = [];
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5)); // Golden angle for spiral
+    
+    for (let i = 0; i < step.particles; i++) {
+      const angle = i * goldenAngle;
+      const radius = step.radius * (0.8 + Math.sin(i * 0.5) * 0.2);
+      
+      particles.push({
+        id: i,
+        x: Math.cos(angle) * radius,
+        y: Math.sin(angle) * radius,
+        delay: i * 0.1
+      });
+    }
+    
+    return particles;
+  };
+
+  return (
+    <div style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center' }}>
+      
+      {/* Left Side - Title and Control */}
+      <div style={{ flex: 1, padding: '40px', maxWidth: '500px' }}>
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          style={{ 
+            fontSize: '2.5rem', 
+            marginBottom: '20px',
+            background: 'linear-gradient(135deg, #ffd93d, #88d8b0)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+            lineHeight: 1.2
+          }}
+        >
+          The Inner-Outer Alignment Method
+        </motion.h1>
+        
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ 
+            fontSize: '1.1rem', 
+            marginBottom: '30px',
+            lineHeight: 1.5,
+            color: '#e0e0e0'
+          }}
+        >
+          My approach differs because it addresses entrepreneurship from the inside out:
+        </motion.p>
+
+        {/* Step Details */}
+        <AnimatePresence mode="wait">
+          {activeStep > 0 && (
+            <motion.div
+              key={activeStep}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                padding: '20px',
+                background: 'rgba(255, 255, 255, 0.05)',
+                borderRadius: '12px',
+                border: `2px solid ${steps[activeStep - 1]?.color}`,
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <h3 style={{ 
+                color: steps[activeStep - 1]?.color,
+                fontSize: '1.2rem',
+                marginBottom: '10px'
+              }}>
+                {activeStep}. {steps[activeStep - 1]?.title}
+              </h3>
+              <p style={{ 
+                color: '#e0e0e0',
+                lineHeight: 1.4,
+                fontSize: '0.95rem'
+              }}>
+                {steps[activeStep - 1]?.description}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Play Controls */}
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+          style={{
+            marginTop: '20px',
+            padding: '10px 20px',
+            background: 'rgba(255, 217, 61, 0.2)',
+            border: '2px solid #ffd93d',
+            borderRadius: '20px',
+            color: '#ffd93d',
+            fontSize: '0.9rem',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 217, 61, 0.3)' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {isAutoPlaying ? '⏸ Pause' : '▶ Play'}
+        </motion.button>
+      </div>
+
+      {/* Right Side - Consciousness Tree Visualization */}
+      <div style={{ 
+        flex: 1, 
+        height: '400px', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        position: 'relative'
+      }}>
+        
+        {/* Central Core - Always visible */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, type: "spring", stiffness: 300 }}
+          style={{
+            position: 'absolute',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, #ffd93d 0%, #ff9a9e 100%)',
+            boxShadow: '0 0 40px rgba(255, 217, 61, 0.6)',
+            zIndex: 10
+          }}
+        >
+          <motion.div
+            animate={{ 
+              scale: [1, 1.2, 1],
+              rotate: [0, 360]
+            }}
+            transition={{ 
+              duration: 4,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              border: '2px solid rgba(255, 255, 255, 0.3)'
+            }}
+          />
+        </motion.div>
+
+        {/* Expanding Rings */}
+        {steps.map((step, index) => (
+          <motion.div
+            key={step.id}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={activeStep >= step.id ? {
+              scale: 1,
+              opacity: [0, 0.7, 0.3],
+              rotate: 360
+            } : { scale: 0, opacity: 0 }}
+            transition={{
+              duration: 2,
+              delay: index * 0.3,
+              ease: "easeOut"
+            }}
+            style={{
+              position: 'absolute',
+              width: `${step.radius * 1.2}px`,
+              height: `${step.radius * 1.2}px`,
+              border: `2px solid ${step.color}`,
+              borderRadius: '50%',
+              borderStyle: 'dashed',
+              borderDasharray: '8 4'
+            }}
+          />
+        ))}
+
+        {/* Sacred Geometry Particles */}
+        {steps.map((step, stepIndex) => 
+          generateParticles(step, stepIndex).slice(0, step.particles / 2).map(particle => (
+            <motion.div
+              key={`${step.id}-${particle.id}`}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={activeStep >= step.id ? {
+                scale: [0, 1, 0.8],
+                opacity: [0, 1, 0.6],
+                x: particle.x * 0.8,
+                y: particle.y * 0.8,
+              } : { scale: 0, opacity: 0 }}
+              transition={{
+                duration: 1.5,
+                delay: stepIndex * 0.3 + particle.delay,
+                repeat: Infinity,
+                repeatType: "reverse",
+                repeatDelay: 1
+              }}
+              style={{
+                position: 'absolute',
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: step.color,
+                boxShadow: `0 0 12px ${step.color}`,
+                zIndex: 5
+              }}
+            />
+          ))
+        )}
+
+        {/* Progress Indicator */}
+        <div style={{
+          position: 'absolute',
+          bottom: '-30px',
+          display: 'flex',
+          gap: '8px'
+        }}>
+          {[0, ...steps.map(s => s.id)].map(stepId => (
+            <motion.div
+              key={stepId}
+              onClick={() => {
+                setActiveStep(stepId);
+                setIsAutoPlaying(false);
+              }}
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: activeStep === stepId ? '#ffd93d' : 'rgba(255, 255, 255, 0.3)',
+                cursor: 'pointer',
+                border: '1px solid rgba(255, 255, 255, 0.5)'
+              }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            />
+          ))}
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+const MindMatrixVisualization = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [activeFilter, setActiveFilter] = useState('limiting');
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  
+  // Information particles representing "raw reality"
+  const rawInformation = [
+    { id: 1, text: "New Opportunity", color: "#4ade80" },
+    { id: 2, text: "Challenge", color: "#f59e0b" },
+    { id: 3, text: "Feedback", color: "#3b82f6" }
+  ];
+
+  const presuppositionFilters = {
+    limiting: {
+      name: "Limiting Beliefs",
+      color: "#ef4444",
+      description: "I'm not capable enough",
+      filteredResults: [
+        { original: "New Opportunity", filtered: "Too risky for me", color: "#dc2626" },
+        { original: "Challenge", filtered: "I'll probably fail", color: "#dc2626" },
+        { original: "Feedback", filtered: "Criticism of my flaws", color: "#dc2626" }
+      ]
+    },
+    empowering: {
+      name: "Empowering Beliefs", 
+      color: "#10b981",
+      description: "I am capable and growing",
+      filteredResults: [
+        { original: "New Opportunity", filtered: "Perfect growth chance", color: "#059669" },
+        { original: "Challenge", filtered: "Learning opportunity", color: "#059669" },
+        { original: "Feedback", filtered: "Valuable guidance", color: "#059669" }
+      ]
+    }
+  };
+
+  const formulaSteps = [
+    { text: "Presuppositions", color: "#fbbf24" },
+    { text: "Perception", color: "#60a5fa" },
+    { text: "Decisions", color: "#a78bfa" },
+    { text: "Actions", color: "#fb7185" },
+    { text: "Results", color: "#34d399" }
+  ];
+
+  // Auto-advance through steps
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentStep(prev => (prev + 1) % (formulaSteps.length + 1));
+    }, 2500);
+    
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, formulaSteps.length]);
+
+  return (
+    <div style={{ display: 'flex', width: '100%', height: '100%', alignItems: 'center' }}>
+      
+      {/* Left Panel - Formula and Controls */}
+      <div style={{ flex: 1, padding: '30px', maxWidth: '400px' }}>
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{ 
+            fontSize: '1.8rem', 
+            marginBottom: '15px',
+            background: 'linear-gradient(135deg, #fbbf24, #10b981)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent'
+          }}
+        >
+          The Matrix of Your Mind
+        </motion.h2>
+        
+        <p style={{ 
+          fontSize: '1rem', 
+          marginBottom: '25px',
+          lineHeight: 1.4,
+          color: '#e5e7eb'
+        }}>
+          Your presuppositions filter reality before it reaches your consciousness.
+        </p>
+
+        {/* Mathematical Formula */}
+        <div style={{ marginBottom: '25px' }}>
+          <h4 style={{ color: '#fbbf24', marginBottom: '15px' }}>The Formula:</h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {formulaSteps.map((step, index) => (
+              <motion.div
+                key={step.text}
+                animate={{ 
+                  opacity: currentStep >= index ? 1 : 0.4,
+                  scale: currentStep === index ? 1.05 : 1,
+                  x: currentStep === index ? 5 : 0
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '6px 12px',
+                  background: currentStep === index ? 'rgba(255,255,255,0.1)' : 'transparent',
+                  borderRadius: '6px',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: step.color,
+                  marginRight: '10px'
+                }} />
+                <span style={{ color: step.color, fontWeight: 'bold' }}>{step.text}</span>
+                {index < formulaSteps.length - 1 && (
+                  <span style={{ marginLeft: '10px', color: '#6b7280' }}>→</span>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Filter Toggle */}
+        <div style={{ marginBottom: '20px' }}>
+          <h4 style={{ color: '#e5e7eb', marginBottom: '10px' }}>Try Different Filters:</h4>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {Object.entries(presuppositionFilters).map(([key, filter]) => (
+              <motion.button
+                key={key}
+                onClick={() => setActiveFilter(key)}
+                style={{
+                  padding: '6px 12px',
+                  background: activeFilter === key ? filter.color : 'rgba(255,255,255,0.1)',
+                  border: `1px solid ${filter.color}`,
+                  borderRadius: '15px',
+                  color: activeFilter === key ? 'white' : filter.color,
+                  fontSize: '0.8rem',
+                  cursor: 'pointer'
+                }}
+                whileHover={{ scale: 1.05 }}
+              >
+                {filter.name}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+
+        <motion.button
+          onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+          style={{
+            padding: '8px 16px',
+            background: 'rgba(251,191,36,0.2)',
+            border: '1px solid #fbbf24',
+            borderRadius: '15px',
+            color: '#fbbf24',
+            fontSize: '0.8rem',
+            cursor: 'pointer'
+          }}
+        >
+          {isAutoPlaying ? '⏸ Pause' : '▶ Play'}
+        </motion.button>
+      </div>
+
+      {/* Right Panel - Matrix Demo */}
+      <div style={{ flex: 1, position: 'relative', height: '400px', padding: '20px' }}>
+        
+        {/* Raw Input */}
+        <div style={{ position: 'absolute', left: '20px', top: '50px' }}>
+          <h4 style={{ color: '#e5e7eb', marginBottom: '10px', fontSize: '0.9rem' }}>Raw Reality</h4>
+          {rawInformation.map((info, index) => (
+            <motion.div
+              key={info.id}
+              animate={{ 
+                opacity: [0.6, 1, 0.6],
+                y: [0, -5, 0]
+              }}
+              transition={{ 
+                duration: 2,
+                delay: index * 0.2,
+                repeat: Infinity
+              }}
+              style={{
+                padding: '6px 10px',
+                background: `${info.color}20`,
+                border: `1px solid ${info.color}`,
+                borderRadius: '10px',
+                marginBottom: '8px',
+                fontSize: '0.8rem',
+                color: info.color
+              }}
+            >
+              {info.text}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Filter Lens */}
+        <div style={{ 
+          position: 'absolute', 
+          left: '50%', 
+          top: '50%', 
+          transform: 'translate(-50%, -50%)'
+        }}>
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              border: `3px solid ${presuppositionFilters[activeFilter].color}`,
+              background: `conic-gradient(${presuppositionFilters[activeFilter].color}40, transparent)`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: `0 0 20px ${presuppositionFilters[activeFilter].color}60`
+            }}
+          >
+            <span style={{ fontSize: '0.7rem', color: 'white' }}>FILTER</span>
+          </motion.div>
+        </div>
+
+        {/* Filtered Output */}
+        <div style={{ position: 'absolute', right: '20px', top: '50px' }}>
+          <h4 style={{ color: '#e5e7eb', marginBottom: '10px', fontSize: '0.9rem' }}>Your Reality</h4>
+          <AnimatePresence mode="wait">
+            {presuppositionFilters[activeFilter].filteredResults.map((result, index) => (
+              <motion.div
+                key={`${activeFilter}-${index}`}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                transition={{ delay: index * 0.1 }}
+                style={{
+                  padding: '6px 10px',
+                  background: `${result.color}20`,
+                  border: `1px solid ${result.color}`,
+                  borderRadius: '10px',
+                  marginBottom: '8px',
+                  fontSize: '0.8rem',
+                  color: result.color
+                }}
+              >
+                {result.filtered}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Flow Arrows */}
+        <svg style={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
+          <motion.path
+            d="M 150,150 Q 200,120 250,150"
+            fill="none"
+            stroke={presuppositionFilters[activeFilter].color}
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            animate={{ strokeDashoffset: [0, -8] }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.path
+            d="M 250,180 Q 300,150 350,180"
+            fill="none"
+            stroke={presuppositionFilters[activeFilter].color}
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            animate={{ strokeDashoffset: [0, -8] }}
+            transition={{ duration: 1, delay: 0.2, repeat: Infinity, ease: "linear" }}
+          />
+        </svg>
+
+        {/* Key Message */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(0,0,0,0.7)',
+            padding: '8px 15px',
+            borderRadius: '15px',
+            fontSize: '0.8rem',
+            color: '#fbbf24',
+            border: '1px solid #fbbf24'
+          }}
+        >
+          💡 Change the filter → Change your reality
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const EnhancedSlide = ({ slide, isTransitioning }) => {
+  // Check if this slide needs special visualization
+  if (slide.content.visualization === 'inner-outer-alignment') {
+    return (
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        transition: 'opacity 0.15s ease-in-out',
+        opacity: isTransitioning ? 0.3 : 1,
+        transform: `scale(${isTransitioning ? 0.98 : 1})`,
+        minHeight: '500px'
+      }}>
+        <InnerOuterAlignmentVisualization />
+      </div>
+    );
+  }
+
+  // Check for Mind Matrix visualization
+  if (slide.content.visualization === 'mind-matrix') {
+    return (
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        transition: 'opacity 0.15s ease-in-out',
+        opacity: isTransitioning ? 0.3 : 1,
+        transform: `scale(${isTransitioning ? 0.98 : 1})`,
+        minHeight: '500px'
+      }}>
+        <MindMatrixVisualization />
+      </div>
+    );
+  }
+
+  // Fallback to default slide rendering
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '40px',
+      transition: 'opacity 0.15s ease-in-out',
+      opacity: isTransitioning ? 0.3 : 1
+    }}>
+      <div style={{ 
+        textAlign: 'center', 
+        maxWidth: '800px',
+        transform: `scale(${isTransitioning ? 0.98 : 1})`,
+        transition: 'transform 0.15s ease-out'
+      }}>
+        {slide.content.title && (
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '20px', lineHeight: 1.2 }}>
+            {slide.content.title}
+          </h1>
+        )}
+        
+        {slide.content.description && (
+          <p style={{ 
+            fontSize: '1.2rem', 
+            marginBottom: '30px',
+            lineHeight: 1.5,
+            color: '#e0e0e0'
+          }}>
+            {slide.content.description}
+          </p>
+        )}
+        
+        {/* Add all your existing slide content rendering here */}
+        {slide.content.benefits && (
+          <div style={{ marginTop: '20px' }}>
+            {slide.content.benefits.map((benefit, index) => (
+              <p key={index} style={{ 
+                fontSize: '1.2rem',
+                color: '#88d8b0',
+                marginBottom: '10px'
+              }}>
+                • {benefit}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default EnhancedSlide;
