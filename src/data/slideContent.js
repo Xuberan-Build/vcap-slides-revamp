@@ -5,7 +5,6 @@ import { approachSection } from './sections/approachSection';
 import { presuppositionsSection } from './sections/presuppositionsSection';
 import { moneyPresuppositionsSection } from './sections/moneyPresuppositionsSection';
 import { selfConceptSection } from './sections/selfConceptSection';
-import { valuesSection } from './sections/valuesSection';
 
 // Import individual presuppositions
 import { presupposition1 } from './presuppositions/presupposition1';
@@ -39,7 +38,6 @@ export const slideContent = {
   ...presupposition9,
   ...presupposition10,
   ...moneyPresuppositionsSection,
-  ...valuesSection,
   ...selfConceptSection
 };
 
