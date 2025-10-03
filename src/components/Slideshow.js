@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { slideContent, navigationMap } from '../data/slideContent';
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
+import { useModule } from '../contexts/ModuleContext';
 import Slide from './Slide';
 import Navigation from './Navigation';
 import ProgressBar from './ProgressBar';
 
-const Slideshow = () => {
+const Slideshow = ({ moduleId }) => {
   const [currentCoords, setCurrentCoords] = useState('0,0');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const { markSlideVisited } = useModule();
+  
+  // Mark slide as visited when coordinates change
+  useEffect(() => {
+    markSlideVisited(moduleId, currentCoords);
+  }, [currentCoords, moduleId, markSlideVisited]);
   
   // Get current slide data with error handling
   const currentNavigation = navigationMap.get(currentCoords);
   
   // Helper function to get slide content by path
   const getSlideContent = (contentPath) => {
-    console.log('Looking for path:', contentPath);
-    console.log('Available slideContent keys:', Object.keys(slideContent));
-    
     const parts = contentPath.split('.');
     let content = slideContent;
     for (const part of parts) {
-      console.log('Looking for part:', part, 'in:', Object.keys(content || {}));
       if (!content[part]) {
         console.warn(`Content path not found: ${contentPath} at part: ${part}`);
         return { content: { title: 'Content Not Found', description: `Path: ${contentPath}` } };
       }
       content = content[part];
     }
-    console.log('Found content:', content);
     return content;
   };
   
@@ -146,6 +148,7 @@ const Slideshow = () => {
         padding: '8px 12px',
         borderRadius: '4px'
       }}>
+        <div>Module: {moduleId}</div>
         <div>Position: {currentCoords}</div>
         <div>Slide: {currentNavigation.content}</div>
         <div>Available: {Object.keys(currentNavigation.connections).filter(dir => 
